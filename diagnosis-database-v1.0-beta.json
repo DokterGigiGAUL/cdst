@@ -458,17 +458,39 @@
       "icd10": "C06.9",
       "prevalence": "moderate",
       "criteria": {
-        "warna": ["campuran-merah-putih", "merah", "putih"],
-        "morfologi": {
-          "kategori": "depressed",
-          "detail": "ulcer",
+          "warna": ["campuran-merah-putih"],
+          "morfologi": {
+            "kategori": ["depressed", "elevated"],
+            "detail": ["ulcer", "nodul", "tumor"],
+            },
+          "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
+          "ukuran": {
+            "kategori": ["besar"],
+            "min": 1.0,
+            "progressive": true
+          },
+          "nyeri": "stadium-lanjut",
+          "durasi": {
+            "type": "kronik",
+            "healing": "> 2-3 minggu",
+            "tidak-sembuh": true
+          },
+          "requiredCriteria": {
+            "CRITICAL": true,
+            "minimumMatch": [
+              "ukuran-besar",
+              "durasi-kronik",
+              "lokasi-high-risk"
+            ],
+            "warningText": "⚠️ CATATAN PENTING: Diagnosis KSS memerlukan konfirmasi dengan pemeriksaan klinis tambahan yang HANYA bisa dinilai saat pemeriksaan langsung: (1) Indurasi tepi lesi (+), (2) Tepi lesi bergulung (rolled border), (3) Fiksasi jaringan. WAJIB BIOPSI untuk konfirmasi definitif."
+          }
           "karakteristik": {
             "jumlah": "soliter",
             "bentuk_tepi": "ireguler",
             "tepi": "raised-rolled",
             "indurasi": true,
             "fiksasi": true
-          }
+          }  
         },
         "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
         "ukuran": {
@@ -483,15 +505,16 @@
         }
       },
       "klinisInfo": {
-        "tandaGejala": [
+         "tandaGejala": [
+          "⚠️ DIAGNOSIS MEMERLUKAN: Indurasi tepi (+), tepi bergulung, fiksasi jaringan",
+          "Tidak sembuh > 2-3 minggu (kriteria WAJIB)",
+          "Ukuran umumnya > 1 cm dan cenderung membesar",
           "Ulkus dengan tepi bergulung (rolled border) dan berlekuk",
-          "Indurasi pada margin lesi (+)",
           "Sering tidak nyeri pada stadium awal",
           "Nyeri pada stadium lanjut",
-          "Tidak sembuh > 2-3 minggu",
           "Dapat muncul dari leukoplakia/eritroplakia sebelumnya",
           "Pembesaran limfonodi leher (stadium lanjut)"
-        ],
+],
         "faktorPemicu": [
           "Tembakau (rokok, cerutu, tembakau kunyah)",
           "Alkohol (sinergis dengan tembakau)",
