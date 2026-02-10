@@ -916,13 +916,17 @@
         },
         "lokasi": ["mukosa-bukal", "lidah-lateral", "mukosa-labial"],
         "ukuran": {
-          "kategori": ["kecil", "sedang", "besar"],
+          "kategori": ["kecil", "sedang"],
           "sesuai-trauma": true
         },
         "nyeri": true,
         "durasi": {
           "healing": "7-10 hari",
           "type": "akut"
+        },
+        "exclusionCriteria": {
+          "if_kronik": "Pertimbangkan TUGSE atau pre/malignansi",
+          "if_besar_dan_kronik": "BUKAN traumatic ulcer biasa"
         }
       },
       "klinisInfo": {
