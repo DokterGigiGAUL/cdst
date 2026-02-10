@@ -1,0 +1,1249 @@
+{
+  "meta": {
+    "version": "1.0-beta",
+    "lastUpdated": "2024-02-09",
+    "source": "Panduan Diagnosa Lesi Oral - Drg. Agam Ferry Erwana, Sp.PM",
+    "totalDiagnoses": 15,
+    "description": "Database diagnosis lesi oral untuk aplikasi DiagnosaMulut - Beta Version (Free)",
+    "monetization": {
+      "tier": "free",
+      "limitations": [
+        "15 diagnosis umum",
+        "Tatalaksana general (tanpa dosis spesifik)",
+        "Karakteristik dasar (tanpa indurasi/konsistensi detail)"
+      ],
+      "premiumFeatures": [
+        "50+ diagnosis lengkap",
+        "Dosis obat spesifik",
+        "Karakteristik lanjutan (indurasi, konsistensi, usia, gender)",
+        "Red flags alerts",
+        "Image upload & AI analysis",
+        "Patient history & analytics"
+      ]
+    }
+  },
+  
+  "diagnoses": [
+    {
+      "id": "stomatitis-aftosa-minor",
+      "name": "Stomatitis Aftosa Tipe Minor",
+      "commonName": "Sariawan",
+      "icd10": "K12.0",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "depressed",
+          "detail": "ulcer",
+          "karakteristik": {
+            "jumlah": ["soliter", "multipel"],
+            "bentuk_tepi": "regular",
+            "tepi": "flat",
+            "kedalaman": "superficial"
+          }
+        },
+        "lokasi": ["mukosa-bukal", "mukosa-labial", "dasar-mulut", "lidah-lateral", "lidah-ventral"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang"],
+          "min": 0.3,
+          "max": 1.0,
+          "unit": "cm"
+        },
+        "nyeri": true,
+        "durasi": {
+          "healing": "7-10 hari",
+          "type": "akut"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Ulkus dangkal dengan diameter 0.3-1 cm",
+          "Nyeri tajam yang signifikan",
+          "Bagian tengah merah dengan tepian putih",
+          "Tepi regular (berbentuk oval/lingkaran)",
+          "Prodromal ringan (rasa terbakar sebelum muncul)",
+          "Sering pertama kali muncul pada anak-anak dan remaja"
+        ],
+        "faktorPemicu": [
+          "Disfungsi sistem imun sementara",
+          "Bukan infeksi",
+          "Stress",
+          "Trauma minor"
+        ],
+        "catatan": "Tipe minor adalah yang paling umum (~80% kasus). Sembuh tanpa jaringan parut."
+      },
+      "tatalaksana": {
+        "ringkas": "Sembuh spontan 7-10 hari. Kortikosteroid topikal untuk kasus rekuren.",
+        "detail": [
+          "Observasi - sembuh spontan dalam 7-10 hari",
+          "Kortikosteroid topikal atau sistemik untuk pasien dengan serangan sering",
+          "Obat paliatif topikal (anestesi lokal) untuk mengurangi nyeri",
+          "Hindari makanan pedas, asam, atau keras"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "traumatic-ulcer",
+          "alasan": "Bentuk lebih ireguler, ada riwayat trauma jelas",
+          "pembeda": "Stomatitis aftosa: tepi regular, tidak ada riwayat trauma spesifik"
+        },
+        {
+          "id": "herpes-labialis",
+          "alasan": "Lokasi berbeda - herpes pada mukosa berkeratin",
+          "pembeda": "Stomatitis aftosa: lokasi mukosa bergerak (non-keratinized)"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 50-51"]
+    },
+    
+    {
+      "id": "kandidiasis-pseudomembran",
+      "name": "Kandidiasis Pseudomembran Akut",
+      "commonName": "Oral Thrush",
+      "icd10": "B37.0",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["putih"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": "plak",
+          "karakteristik": {
+            "scrappable": true,
+            "konsistensi": "seperti dadih susu"
+          }
+        },
+        "lokasi": ["mukosa-bukal", "palatum-durum", "palatum-lunak", "lidah-dorsal"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang", "besar"],
+          "variabel": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "akut-kronik"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Plak putih seperti dadih susu",
+          "Dapat dikerok/digosok (scrappable)",
+          "Meninggalkan mukosa merah/merah muda di bawahnya",
+          "Tanpa gejala atau sensasi terbakar ringan",
+          "Rasa asin atau pahit yang tidak menyenangkan"
+        ],
+        "faktorPemicu": [
+          "Gangguan sistem kekebalan tubuh",
+          "Penggunaan antibiotik spektrum luas",
+          "Diabetes tidak terkontrol",
+          "Pemakaian steroid inhaler",
+          "Xerostomia (mulut kering)"
+        ],
+        "catatan": "Infeksi jamur Candida albicans. Hifa + ragi + sel epitel deskuamasi."
+      },
+      "tatalaksana": {
+        "ringkas": "Antifungal topikal/sistemik (nystatin, miconazole, fluconazole)",
+        "detail": [
+          "Antifungal topikal: Nystatin suspension, Miconazole gel",
+          "Antifungal sistemik untuk kasus berat: Fluconazole",
+          "Kontrol faktor predisposisi (gula darah, kebersihan mulut)",
+          "Hentikan antibiotik jika memungkinkan",
+          "Durasi terapi: 7-14 hari"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "leukoplakia",
+          "alasan": "Sama-sama lesi putih",
+          "pembeda": "Kandidiasis: dapat dikerok. Leukoplakia: tidak dapat dikerok"
+        },
+        {
+          "id": "coated-tongue",
+          "alasan": "Pada dorsal lidah, sama-sama putih",
+          "pembeda": "Coated tongue: lebih difus, tidak seperti dadih, sulit dikerok"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 43-44"]
+    },
+
+    {
+      "id": "leukoplakia",
+      "name": "Leukoplakia",
+      "commonName": "Bercak Putih (Prakanker)",
+      "icd10": "K13.2",
+      "prevalence": "moderate",
+      "criteria": {
+        "warna": ["putih"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": "plak",
+          "karakteristik": {
+            "scrappable": false,
+            "tipe": ["homogen", "non-homogen"],
+            "margin": "distinct"
+          }
+        },
+        "lokasi": ["mukosa-bukal", "gingiva", "lidah-dorsal", "lidah-lateral", "dasar-mulut", "palatum-durum", "palatum-lunak"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang", "besar"],
+          "variabel": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Bercak atau plak putih yang tidak dapat dikerok",
+          "Tidak dapat didiagnosis sebagai penyakit lain (diagnosis eksklusi)",
+          "Tanpa gejala (asimtomatik)",
+          "Tipe homogen: tebal, permukaan rata",
+          "Tipe non-homogen: nodular, granular, verruciform - lebih berisiko"
+        ],
+        "faktorPemicu": [
+          "Penggunaan tembakau (rokok, cerutu)",
+          "Konsumsi alkohol",
+          "Trauma kronis",
+          "Infeksi HPV tipe 16 dan 18",
+          "Lebih sering pada usia lanjut"
+        ],
+        "catatan": "PENTING: Lesi prakanker. Tingkat transformasi ke karsinoma ~4%. Biopsi WAJIB."
+      },
+      "tatalaksana": {
+        "ringkas": "BIOPSI WAJIB untuk konfirmasi. Eksisi lengkap jika ada displasia.",
+        "detail": [
+          "Biopsi insisional/eksisional untuk diagnosis histopatologi",
+          "Jika ada displasia: eksisi lengkap + follow-up jangka panjang",
+          "Eliminasi faktor risiko (stop merokok, alkohol)",
+          "Kontrol setiap 3-6 bulan",
+          "Edukasi pasien tentang risiko keganasan"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "kandidiasis-hiperplastik",
+          "alasan": "Sama-sama plak putih tidak dapat dikerok",
+          "pembeda": "Trial terapi antifungal - jika hilang = kandidiasis"
+        },
+        {
+          "id": "lichen-planus-hipertrofik",
+          "alasan": "Lesi putih kronik",
+          "pembeda": "Lichen planus: ada striae Wickham, sering bilateral"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 47-48"]
+    },
+
+    {
+      "id": "eritroplakia",
+      "name": "Eritroplakia",
+      "commonName": "Bercak Merah (Prakanker)",
+      "icd10": "K13.29",
+      "prevalence": "rare",
+      "criteria": {
+        "warna": ["merah"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": "plak",
+          "karakteristik": {
+            "tekstur": "lembut seperti beludru",
+            "margin": "distinct"
+          }
+        },
+        "lokasi": ["lidah-dorsal", "lidah-lateral", "dasar-mulut", "palatum-lunak"],
+        "ukuran": {
+          "kategori": ["sedang", "besar"],
+          "variabel": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Bercak/plak merah dengan tekstur seperti beludru",
+          "Tidak dapat didiagnosis sebagai penyakit lain (diagnosis eksklusi)",
+          "Biasanya tanpa gejala",
+          "Permukaan halus dan lembut"
+        ],
+        "faktorPemicu": [
+          "Tembakau",
+          "Alkohol",
+          "Ada bentuk idiopatik",
+          "Lebih sering pada usia paruh baya hingga lanjut"
+        ],
+        "catatan": "BAHAYA TINGGI: >90% menunjukkan displasia berat/karsinoma. Lebih berbahaya dari leukoplakia!"
+      },
+      "tatalaksana": {
+        "ringkas": "BIOPSI SEGERA! Eksisi lengkap + follow-up jangka panjang.",
+        "detail": [
+          "BIOPSI WAJIB - tingkat displasia/keganasan sangat tinggi",
+          "Eksisi bedah lengkap",
+          "Follow-up jangka panjang (risiko rekurensi/lesi baru)",
+          "Eliminasi faktor risiko",
+          "Rujuk ke spesialis bedah mulut/onkologi"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "kandidiasis-eritematous",
+          "alasan": "Sama-sama lesi merah",
+          "pembeda": "Trial antifungal. Eritroplakia tidak responsif."
+        },
+        {
+          "id": "karsinoma-sel-skuamosa-stadium-awal",
+          "alasan": "Klinis sangat mirip",
+          "pembeda": "Hanya bisa dibedakan dengan biopsi histopatologi"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 59-60"]
+    },
+
+    {
+      "id": "lichen-planus-retikuler",
+      "name": "Oral Lichen Planus Tipe Retikuler",
+      "commonName": "Lichen Planus (garis putih)",
+      "icd10": "L43.9",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["putih"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": "papula",
+          "karakteristik": {
+            "pola": "striae Wickham (garis jalinan putih)",
+            "scrappable": false,
+            "distribusi": "bilateral-simetris"
+          }
+        },
+        "lokasi": ["mukosa-bukal"],
+        "ukuran": {
+          "kategori": ["sedang", "besar"],
+          "variabel": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik",
+          "pola": "flare-ups (naik-turun)"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Papula yang menyatu membentuk jaringan garis putih (striae Wickham)",
+          "Tidak dapat dikerok",
+          "Biasanya tanpa gejala",
+          "Distribusi bilateral dan simetris",
+          "Lebih sering pada wanita (rasio 3:2)",
+          "Usia dewasa paruh baya"
+        ],
+        "faktorPemicu": [
+          "Penyakit autoimun",
+          "Reaksi hipersensitivitas",
+          "Stress dapat memicu flare-up",
+          "Kadang terkait hepatitis C"
+        ],
+        "catatan": "Kondisi kronik yang naik-turun. Tipe retikuler adalah yang paling umum dan paling jinak."
+      },
+      "tatalaksana": {
+        "ringkas": "Jika asimtomatik: observasi. Jika ada sensasi terbakar: antifungal (untuk kandidiasis sekunder).",
+        "detail": [
+          "Biopsi untuk konfirmasi diagnosis (jika perlu)",
+          "Tipe retikuler tanpa gejala: tidak perlu terapi",
+          "Jika sensasi terbakar: berikan antifungal (sering ada kandidiasis sekunder)",
+          "Evaluasi ulang tahunan (monitoring)",
+          "Hindari makanan pedas/asam yang memicu iritasi"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "leukoplakia",
+          "alasan": "Sama-sama lesi putih yang tidak dapat dikerok",
+          "pembeda": "Lichen planus: pola striae bilateral. Leukoplakia: plak homogen, unilateral"
+        },
+        {
+          "id": "leukoedema",
+          "alasan": "Lesi putih bilateral di mukosa bukal",
+          "pembeda": "Leukoedema: hilang saat mukosa diregangkan"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 49-50"]
+    },
+
+    {
+      "id": "herpes-labialis",
+      "name": "Herpes Labialis",
+      "commonName": "Cold Sore / Fever Blister",
+      "icd10": "B00.1",
+      "prevalence": "very-common",
+      "criteria": {
+        "warna": ["campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "depressed",
+          "detail": "ulcer",
+          "karakteristik": {
+            "jumlah": "multipel",
+            "bentuk_tepi": "ireguler",
+            "awal": "vesikel",
+            "akhir": "ulkus yang menyatu + krusta"
+          }
+        },
+        "lokasi": ["mukosa-labial", "palatum-durum", "gingiva"],
+        "ukuran": {
+          "kategori": "kecil",
+          "individual": "2-4mm",
+          "cluster": true
+        },
+        "nyeri": true,
+        "durasi": {
+          "healing": "7-10 hari",
+          "type": "akut"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Prodromal: kesemutan, rasa terbakar sebelum muncul (24-48 jam)",
+          "Cluster vesikel pada mukosa berkeratin",
+          "Vesikel pecah menjadi ulkus multipel dangkal",
+          "Nyeri signifikan",
+          "Pada bibir: sering dengan krusta",
+          "Rekuren pada lokasi yang sama"
+        ],
+        "faktorPemicu": [
+          "Reaktivasi virus HSV-1 (dormant di ganglion)",
+          "Paparan sinar UV berlebihan",
+          "Stress/kelelahan",
+          "Demam/sakit",
+          "Menstruasi",
+          "Immunocompromised"
+        ],
+        "catatan": "Virus herpes simpleks tipe 1. Infeksi primer biasanya subklinis. Yang sering terlihat adalah rekuren."
+      },
+      "tatalaksana": {
+        "ringkas": "Antiviral sistemik dalam 48-72 jam pertama (Acyclovir, Valacyclovir). Analgesik topikal.",
+        "detail": [
+          "Antiviral sistemik (HARUS dalam 48-72 jam pertama):",
+          "  - Acyclovir 400mg 3x/hari, 7-10 hari",
+          "  - Valacyclovir 500mg 2x/hari, 7-10 hari",
+          "Analgesik topikal untuk nyeri",
+          "Antipiretik jika ada demam",
+          "Hindari trigger (tabir surya untuk bibir)",
+          "Untuk rekuren sering: terapi supresif"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "stomatitis-aftosa-herpetiformis",
+          "alasan": "Sama-sama ulkus multipel kecil",
+          "pembeda": "Herpes: mukosa berkeratin. Aftosa: mukosa bergerak"
+        },
+        {
+          "id": "primary-herpetic-gingivostomatitis",
+          "alasan": "Sama-sama HSV",
+          "pembeda": "Primary: gingiva selalu terlibat, onset akut dengan demam"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 53"]
+    },
+
+    {
+      "id": "karsinoma-sel-skuamosa",
+      "name": "Karsinoma Sel Skuamosa",
+      "commonName": "Kanker Mulut",
+      "icd10": "C06.9",
+      "prevalence": "moderate",
+      "criteria": {
+        "warna": ["campuran-merah-putih", "merah", "putih"],
+        "morfologi": {
+          "kategori": "depressed",
+          "detail": "ulcer",
+          "karakteristik": {
+            "jumlah": "soliter",
+            "bentuk_tepi": "ireguler",
+            "tepi": "raised-rolled",
+            "indurasi": true,
+            "fiksasi": true
+          }
+        },
+        "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
+        "ukuran": {
+          "kategori": ["sedang", "besar"],
+          "min": 1.0,
+          "progressive": true
+        },
+        "nyeri": "stadium-lanjut",
+        "durasi": {
+          "type": "kronik",
+          "tidak-sembuh": true
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Ulkus dengan tepi bergulung (rolled border) dan berlekuk",
+          "Indurasi pada margin lesi (+)",
+          "Sering tidak nyeri pada stadium awal",
+          "Nyeri pada stadium lanjut",
+          "Tidak sembuh > 2-3 minggu",
+          "Dapat muncul dari leukoplakia/eritroplakia sebelumnya",
+          "Pembesaran limfonodi leher (stadium lanjut)"
+        ],
+        "faktorPemicu": [
+          "Tembakau (rokok, cerutu, tembakau kunyah)",
+          "Alkohol (sinergis dengan tembakau)",
+          "Infeksi HPV tipe 16 dan 18",
+          "Radiasi UV (untuk bibir)",
+          "Usia > 40 tahun",
+          "Lebih sering pada pria"
+        ],
+        "catatan": "KEGANASAN! Red flag: ulkus tidak sembuh, indurasi tepi, fiksasi jaringan, limfadenopati."
+      },
+      "tatalaksana": {
+        "ringkas": "RUJUK SEGERA ke spesialis. Biopsi konfirmasi. Pembedahan + radioterapi/kemoterapi.",
+        "detail": [
+          "BIOPSI insisional untuk konfirmasi histopatologi",
+          "Staging (TNM classification)",
+          "RUJUK ke Bedah Onkologi / Bedah Kepala Leher",
+          "Terapi utama: pembedahan (eksisi luas + diseksi leher)",
+          "Adjuvant: radioterapi dan/atau kemoterapi",
+          "Follow-up jangka panjang (risiko rekurensi/metastasis)"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "tugse",
+          "alasan": "Sama-sama ulkus kronik dengan tepi raised",
+          "pembeda": "TUGSE: tanpa indurasi tepi. SCC: indurasi (+) dan fiksasi"
+        },
+        {
+          "id": "stomatitis-aftosa-mayor",
+          "alasan": "Ulkus besar yang dalam",
+          "pembeda": "Aftosa mayor: nyeri sejak awal, sembuh 4-6 minggu. SCC: tidak sembuh"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 58"]
+    },
+
+    {
+      "id": "fibroma",
+      "name": "Fibroma (Irritation Fibroma)",
+      "commonName": "Benjolan Jinak",
+      "icd10": "K13.5",
+      "prevalence": "very-common",
+      "criteria": {
+        "warna": ["merah-muda"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": ["papula", "nodul"],
+          "karakteristik": {
+            "permukaan": "halus",
+            "attachment": ["sessile", "bertangkai"],
+            "konsistensi": "tegas"
+          }
+        },
+        "lokasi": ["lidah-lateral", "lidah-dorsal", "mukosa-labial", "mukosa-bukal"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang"],
+          "variabel": true,
+          "typical": "0.5-2 cm"
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik",
+          "growth": "lambat kemudian statis"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Benjolan berbatas tegas, warna sewarna mukosa",
+          "Permukaan halus",
+          "Tidak nyeri",
+          "Tumbuh lambat kemudian berhenti",
+          "Sessile (berbasis luas) atau bertangkai",
+          "Konsistensi tegas pada palpasi"
+        ],
+        "faktorPemicu": [
+          "Trauma kronis berulang",
+          "Gigitan tidak sengaja (cheek biting)",
+          "Iritasi dari gigi yang tajam/rusak",
+          "Semua usia bisa terkena"
+        ],
+        "catatan": "Hiperplasia jaringan ikat reaktif, bukan neoplasma sejati. Sangat umum dan jinak."
+      },
+      "tatalaksana": {
+        "ringkas": "Eksisi bedah lengkap. Hilangkan faktor iritasi.",
+        "detail": [
+          "Eksisi bedah sederhana (elliptical excision)",
+          "Kirim jaringan untuk pemeriksaan histopatologi (konfirmasi)",
+          "Hilangkan faktor penyebab (perbaiki gigi tajam, dll)",
+          "Prognosis sangat baik, jarang rekuren"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "papiloma",
+          "alasan": "Sama-sama benjolan jinak",
+          "pembeda": "Papiloma: permukaan kasar/verrucous. Fibroma: halus"
+        },
+        {
+          "id": "lipoma",
+          "alasan": "Benjolan lunak sewarna mukosa",
+          "pembeda": "Lipoma: konsistensi lebih lunak (lemak). Fibroma: lebih tegas"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 70"]
+    },
+
+    {
+      "id": "mukokel",
+      "name": "Mukokel (Mucocele)",
+      "commonName": "Kista Ludah",
+      "icd10": "K11.6",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["merah-muda", "biru"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": ["vesikel", "bula"],
+          "karakteristik": {
+            "translucent": true,
+            "fluktuasi": true,
+            "ruptur-siklis": true
+          }
+        },
+        "lokasi": ["mukosa-labial", "mukosa-bukal", "dasar-mulut", "lidah-ventral"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang"],
+          "variabel": true,
+          "typical": "0.5-1.5 cm"
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "akut-kronik",
+          "pola": "muncul-pecah-muncul lagi"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Pembengkakan lunak, tembus cahaya (translucent)",
+          "Warna biru jika dalam, merah muda jika superfisial",
+          "Fluktuasi (+) pada palpasi",
+          "Tidak nyeri",
+          "Sering pecah spontan lalu muncul lagi (siklis)",
+          "Paling sering di bibir bawah"
+        ],
+        "faktorPemicu": [
+          "Trauma pada duktus kelenjar saliva minor",
+          "Paling umum pada anak-anak dan dewasa muda",
+          "Gigitan tidak sengaja"
+        ],
+        "catatan": "Ekstravasasi mukus dari kelenjar saliva minor yang rusak. Bukan kista sejati (tidak ada epitel lining)."
+      },
+      "tatalaksana": {
+        "ringkas": "Eksisi bedah lokal termasuk lobulus kelenjar saliva.",
+        "detail": [
+          "Beberapa sembuh spontan (terutama yang kecil)",
+          "Untuk yang persisten/besar: eksisi bedah",
+          "Eksisi harus termasuk lobulus kelenjar dan duktus yang rusak",
+          "Hindari hanya marsupilisasi (tingkat rekurensi tinggi)",
+          "Untuk ranula (dasar mulut): pendekatan berbeda"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "hemangioma",
+          "alasan": "Sama-sama pembengkakan biru",
+          "pembeda": "Hemangioma: dapat dipucatkan (blanching +). Mukokel: tidak"
+        },
+        {
+          "id": "tumor-kelenjar-liur",
+          "alasan": "Pembengkakan pada area kelenjar saliva",
+          "pembeda": "Tumor: konsistensi lebih keras, tidak fluktuatif, tidak pecah siklis"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 82"]
+    },
+
+    {
+      "id": "geographic-tongue",
+      "name": "Geographic Tongue",
+      "commonName": "Lidah Geografis",
+      "icd10": "K14.1",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "flat",
+          "detail": "makula",
+          "karakteristik": {
+            "pola": "depapilasi dengan border putih",
+            "migrasi": true,
+            "distribusi": "multipel"
+          }
+        },
+        "lokasi": ["lidah-dorsal"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang"],
+          "variabel": true,
+          "multipel": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik",
+          "pola": "migrasi (berpindah lokasi)"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Makula multipel depapilasi (kehilangan papila filiformis)",
+          "Dikelilingi batas putih sedikit menonjol",
+          "Pola berubah-ubah (migrasi) dalam hitungan hari-minggu",
+          "Tanpa gejala atau sensasi terbakar ringan",
+          "Sering dikaitkan dengan fissured tongue",
+          "Lebih sering pada pria (rasio 2:1)"
+        ],
+        "faktorPemicu": [
+          "Etiologi tidak diketahui pasti",
+          "Mungkin terkait atopi/alergi",
+          "Bukan infeksi",
+          "Cenderung familial"
+        ],
+        "catatan": "Kondisi jinak. Diagnosis klinis mudah karena pola migrasi yang khas."
+      },
+      "tatalaksana": {
+        "ringkas": "Tidak perlu terapi. Jika ada sensasi terbakar: steroid topikal.",
+        "detail": [
+          "Mayoritas kasus: tidak perlu terapi (reassurance)",
+          "Jika sensasi terbakar mengganggu:",
+          "  - Steroid topikal (gel triamcinolone atau mouthrinse)",
+          "  - Hindari makanan pedas/asam",
+          "Edukasi pasien bahwa ini kondisi jinak",
+          "Tidak ada terapi definitif"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "kandidiasis-eritematous",
+          "alasan": "Area merah pada lidah dorsal",
+          "pembeda": "Geographic tongue: pola migrasi, border putih khas. Kandidiasis: statis, responsif antifungal"
+        },
+        {
+          "id": "lichen-planus",
+          "alasan": "Ada komponen putih",
+          "pembeda": "Geographic tongue: pola migrasi. Lichen planus: striae bilateral tidak berubah"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 66"]
+    },
+
+    {
+      "id": "amalgam-tattoo",
+      "name": "Amalgam Tattoo",
+      "commonName": "Tatoase Amalgam",
+      "icd10": "K13.79",
+      "prevalence": "common",
+      "criteria": {
+        "warna": ["coklat-hitam"],
+        "morfologi": {
+          "kategori": "flat",
+          "detail": "makula",
+          "karakteristik": {
+            "batas": "jelas atau difus",
+            "radioopak": "kadang terlihat"
+          }
+        },
+        "lokasi": ["gingiva", "mukosa-bukal"],
+        "ukuran": {
+          "kategori": "kecil",
+          "variabel": true,
+          "typical": "beberapa mm"
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "permanen"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Makula hitam-kebiruan atau abu-abu",
+          "Tidak nyeri, asimtomatik",
+          "Batas jelas atau difus",
+          "Tidak berubah ukuran",
+          "Biasanya dekat dengan restorasi amalgam",
+          "Kadang radioopak pada foto rontgen"
+        ],
+        "faktorPemicu": [
+          "Implantasi partikel amalgam ke jaringan lunak",
+          "Saat preparasi/pengeboran amalgam",
+          "Saat ekstraksi gigi dengan tambalan amalgam",
+          "Restorasi amalgam overhang yang aus"
+        ],
+        "catatan": "Jinak, tidak berbahaya. Diagnosis banding utama: melanoma maligna (keganasan)."
+      },
+      "tatalaksana": {
+        "ringkas": "Tidak perlu terapi. Biopsi jika diagnosis ragu untuk menyingkirkan melanoma.",
+        "detail": [
+          "Jika ada restorasi amalgam yang terdokumentasi di sekitarnya: diagnosis klinis",
+          "Jika ada partikel radioopak pada foto rontgen: konfirmasi diagnosis",
+          "Jika tidak ada amalgam atau lokasi tidak biasa: BIOPSI (r/o melanoma)",
+          "Tidak perlu terapi definitif (jinak)",
+          "Eksisi untuk alasan estetik (opsional)"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "melanoma-malignan",
+          "alasan": "Sama-sama pigmentasi hitam",
+          "pembeda": "Amalgam tattoo: statis, ada riwayat amalgam. Melanoma: membesar, dapat elevated"
+        },
+        {
+          "id": "nevus-melanositik",
+          "alasan": "Lesi pigmen coklat-hitam",
+          "pembeda": "Nevus: biasanya sedikit elevated. Amalgam tattoo: flat, ada riwayat amalgam"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 78"]
+    },
+
+    {
+      "id": "hemangioma",
+      "name": "Hemangioma",
+      "commonName": "Tumor Pembuluh Darah Jinak",
+      "icd10": "D18.0",
+      "prevalence": "moderate",
+      "criteria": {
+        "warna": ["merah", "biru", "ungu"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": ["papula", "nodul"],
+          "karakteristik": {
+            "kompresibel": true,
+            "blanching": true
+          }
+        },
+        "lokasi": ["lidah-dorsal", "lidah-lateral", "mukosa-bukal", "mukosa-labial"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang", "besar"],
+          "variabel": true,
+          "congenital": "dapat besar"
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kongenital atau infantil"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Benjolan merah-biru atau ungu",
+          "Kompresibel (dapat ditekan, kembali lagi)",
+          "Blanching (+) - memucat saat ditekan",
+          "Tidak nyeri",
+          "Hadir sejak lahir atau muncul pada masa bayi",
+          "Hemangioma ceri pada bibir: muncul usia paruh baya"
+        ],
+        "faktorPemicu": [
+          "Malformasi vaskular kongenital",
+          "Etiologi tidak diketahui",
+          "Beberapa tipe dapat involusi spontan"
+        ],
+        "catatan": "Jinak. Tipe infantil sering involusi spontan pada usia 5-7 tahun."
+      },
+      "tatalaksana": {
+        "ringkas": "Observasi untuk hemangioma infantil. Terapi: steroid, laser, skleroterapi, atau eksisi.",
+        "detail": [
+          "Hemangioma infantil: observasi (sering involusi spontan)",
+          "Jika tidak involusi atau mengganggu fungsi:",
+          "  - Kortikosteroid sistemik",
+          "  - Laser therapy (Nd:YAG, pulsed dye laser)",
+          "  - Skleroterapi untuk lesi besar",
+          "  - Eksisi bedah",
+          "Hemangioma pada dewasa: biasanya perlu intervensi"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "mukokel",
+          "alasan": "Pembengkakan biru pada mukosa",
+          "pembeda": "Hemangioma: blanching (+). Mukokel: blanching (-), fluktuatif"
+        },
+        {
+          "id": "varikositas",
+          "alasan": "Lesi vaskular biru",
+          "pembeda": "Varikositas: pada usia lanjut, lidah ventral. Hemangioma: sejak kecil"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 61"]
+    },
+
+    {
+      "id": "traumatic-ulcer",
+      "name": "Traumatic Ulcer",
+      "commonName": "Ulkus Traumatik",
+      "icd10": "K12.1",
+      "prevalence": "very-common",
+      "criteria": {
+        "warna": ["kuning", "campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "depressed",
+          "detail": "ulcer",
+          "karakteristik": {
+            "jumlah": "soliter",
+            "bentuk_tepi": "ireguler",
+            "tepi": "flat",
+            "kedalaman": "superficial-dalam"
+          }
+        },
+        "lokasi": ["mukosa-bukal", "lidah-lateral", "mukosa-labial"],
+        "ukuran": {
+          "kategori": ["kecil", "sedang", "besar"],
+          "sesuai-trauma": true
+        },
+        "nyeri": true,
+        "durasi": {
+          "healing": "7-10 hari",
+          "type": "akut"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Ulkus dengan bentuk ireguler",
+          "Nyeri ringan-sedang",
+          "Ada riwayat trauma jelas (gigitan, gigi tajam, luka tusuk, dll)",
+          "Base kuning-abu (fibrin) atau merah",
+          "Tepi flat (tidak raised)",
+          "Sembuh 7-10 hari pada orang sehat"
+        ],
+        "faktorPemicu": [
+          "Gigitan tidak sengaja saat makan/bicara",
+          "Gigi yang tajam/rusak/fraktur",
+          "Trauma dari alat dental (bur, scaler)",
+          "Protesa yang tidak pas",
+          "Luka tusuk (tulang ikan, dll)"
+        ],
+        "catatan": "Diagnosis berdasarkan anamnesis trauma yang jelas. Jika tidak sembuh 2 minggu: pikirkan diagnosis lain!"
+      },
+      "tatalaksana": {
+        "ringkas": "Hilangkan faktor penyebab trauma. Observasi. Analgesik topikal jika perlu.",
+        "detail": [
+          "Identifikasi dan hilangkan sumber trauma",
+          "Perbaiki/haluskan gigi yang tajam",
+          "Perbaiki protesa yang tidak pas",
+          "Analgesik/anestesi topikal untuk nyeri",
+          "Observasi: harus sembuh dalam 7-10 hari",
+          "Jika >2 minggu tidak sembuh: biopsi (r/o keganasan)"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "stomatitis-aftosa",
+          "alasan": "Ulkus soliter yang nyeri",
+          "pembeda": "Aftosa: tepi regular, tanpa trauma jelas. Traumatik: ireguler, ada riwayat trauma"
+        },
+        {
+          "id": "tugse",
+          "alasan": "Ulkus kronik dengan riwayat trauma",
+          "pembeda": "TUGSE: tidak sembuh berminggu-bulan, tepi raised. Traumatik biasa: sembuh 7-10 hari"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 87"]
+    },
+
+    {
+      "id": "tugse",
+      "name": "Traumatic Ulcerative Granuloma with Stromal Eosinophilia",
+      "commonName": "TUGSE / Eosinophilic Ulcer",
+      "icd10": "K13.70",
+      "prevalence": "rare",
+      "criteria": {
+        "warna": ["campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "depressed",
+          "detail": "ulcer",
+          "karakteristik": {
+            "jumlah": "soliter",
+            "bentuk_tepi": "ireguler",
+            "tepi": "raised",
+            "kedalaman": "dalam",
+            "indurasi": "minimal atau tidak ada"
+          }
+        },
+        "lokasi": ["lidah-lateral", "lidah-dorsal", "mukosa-bukal", "mukosa-labial"],
+        "ukuran": {
+          "kategori": ["sedang", "besar"],
+          "min": 1.0,
+          "typical": "1-3 cm"
+        },
+        "nyeri": "ringan-sedang",
+        "durasi": {
+          "type": "kronik",
+          "healing": "berminggu-bulan (delayed)",
+          "tidak-sembuh": "2-12 minggu"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Ulkus dalam yang tidak sembuh-sembuh (>2 minggu)",
+          "Tepi sedikit raised (elevated margin)",
+          "Nyeri ringan hingga sedang",
+          "Riwayat trauma lokal (tapi tidak selalu jelas)",
+          "Indurasi minimal (membedakan dari karsinoma)",
+          "Base granular"
+        ],
+        "faktorPemicu": [
+          "Trauma dalam (deep trauma)",
+          "Kadang trauma tidak disadari pasien",
+          "Respon granulomatosa berlebihan"
+        ],
+        "catatan": "PENTING: Secara klinis dapat menyerupai karsinoma! Biopsi esensial untuk diagnosis. Sering sembuh spontan setelah biopsi."
+      },
+      "tatalaksana": {
+        "ringkas": "Biopsi insisional untuk konfirmasi. Sering sembuh spontan setelah biopsi.",
+        "detail": [
+          "BIOPSI insisional WAJIB (untuk menyingkirkan karsinoma)",
+          "Paradoks: biopsi sering memicu resolusi spontan",
+          "Observasi: sembuh dalam minggu-bulan setelah biopsi",
+          "Jika persisten setelah biopsi: eksisi lengkap",
+          "Hilangkan faktor trauma jika ada"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "karsinoma-sel-skuamosa",
+          "alasan": "SANGAT MIRIP: ulkus kronik dengan tepi raised",
+          "pembeda": "SCC: indurasi (+) kuat, fiksasi. TUGSE: indurasi minimal/tidak ada. HANYA BISA DIBEDAKAN DENGAN BIOPSI!"
+        },
+        {
+          "id": "traumatic-ulcer-biasa",
+          "alasan": "Sama-sama ulkus dengan riwayat trauma",
+          "pembeda": "Traumatik biasa: sembuh 7-10 hari. TUGSE: tidak sembuh berminggu-bulan"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 65"]
+    },
+
+    {
+      "id": "nicotine-stomatitis",
+      "name": "Nicotine Stomatitis",
+      "commonName": "Smoker's Palate",
+      "icd10": "K13.24",
+      "prevalence": "moderate",
+      "criteria": {
+        "warna": ["campuran-merah-putih"],
+        "morfologi": {
+          "kategori": "elevated",
+          "detail": "plak",
+          "karakteristik": {
+            "pola": "papula multipel dengan red dots",
+            "tekstur": "kerikil/cobblestone",
+            "distribusi": "bilateral-simetris"
+          }
+        },
+        "lokasi": ["palatum-durum"],
+        "ukuran": {
+          "kategori": "besar",
+          "difus": true
+        },
+        "nyeri": false,
+        "durasi": {
+          "type": "kronik"
+        }
+      },
+      "klinisInfo": {
+        "tandaGejala": [
+          "Palatum berwarna abu-abu hingga putih difus",
+          "Papula multipel seperti kerikil (cobblestone)",
+          "Titik merah di tengah papula (muara duktus kelenjar minor yang inflamed)",
+          "Distribusi bilateral dan simetris",
+          "Tanpa gejala",
+          "Hanya pada perokok (terutama pipa)"
+        ],
+        "faktorPemicu": [
+          "Panas kronis dari merokok (terutama pipa)",
+          "Reverse smoking (ujung rokok di dalam mulut)",
+          "Konsumsi minuman panas berlebihan"
+        ],
+        "catatan": "SEPENUHNYA REVERSIBEL dalam 1-2 minggu setelah stop merokok. BUKAN prakanker (kecuali reverse smoking)."
+      },
+      "tatalaksana": {
+        "ringkas": "Stop merokok. Lesi reversibel dalam 1-2 minggu. Edukasi pasien.",
+        "detail": [
+          "Edukasi pasien: stop merokok",
+          "Observasi: reversibel komplit 1-2 minggu setelah stop",
+          "Tidak perlu biopsi (diagnosis klinis)",
+          "Nicotine stomatitis BUKAN lesi prakanker",
+          "Monitor kebiasaan merokok pasien"
+        ]
+      },
+      "diagnosisBanding": [
+        {
+          "id": "kandidiasis",
+          "alasan": "Lesi putih difus di palatum",
+          "pembeda": "Kandidiasis: dapat dikerok. Nicotine stomatitis: tidak dapat dikerok, ada red dots"
+        },
+        {
+          "id": "papillomatosis",
+          "alasan": "Papula multipel",
+          "pembeda": "Nicotine stomatitis: reversibel dengan stop rokok, bilateral. Papillomatosis: tidak"
+        }
+      ],
+      "images": [],
+      "references": ["Panduan Diagnosa Lesi Oral, hal. 64"]
+    }
+  ],
+
+  "lookupTables": {
+    "ukuranKategori": {
+      "description": "Kategori ukuran lesi untuk input user",
+      "categories": [
+        {
+          "id": "kecil",
+          "label": "Kecil",
+          "range": "< 0.5 cm",
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "sedang",
+          "label": "Sedang",
+          "range": "0.5 - 2 cm",
+          "min": 0.5,
+          "max": 2.0
+        },
+        {
+          "id": "besar",
+          "label": "Besar",
+          "range": "> 2 cm",
+          "min": 2.0,
+          "max": 999
+        }
+      ]
+    },
+
+    "lokasiHierarki": {
+      "description": "Struktur hierarki lokasi untuk UI (general → specific)",
+      "locations": [
+        {
+          "id": "mukosa-labial",
+          "label": "Mukosa Labial",
+          "sublokasi": null,
+          "keterangan": "Bibir bagian dalam"
+        },
+        {
+          "id": "mukosa-bukal",
+          "label": "Mukosa Bukal",
+          "sublokasi": null,
+          "keterangan": "Pipi bagian dalam"
+        },
+        {
+          "id": "gingiva",
+          "label": "Gingiva",
+          "sublokasi": null,
+          "keterangan": "Gusi"
+        },
+        {
+          "id": "lidah",
+          "label": "Lidah",
+          "sublokasi": [
+            {
+              "id": "lidah-dorsal",
+              "label": "Dorsal (Permukaan atas)"
+            },
+            {
+              "id": "lidah-lateral",
+              "label": "Lateral (Samping)"
+            },
+            {
+              "id": "lidah-ventral",
+              "label": "Ventral (Bawah)"
+            }
+          ],
+          "keterangan": "Pilih area spesifik"
+        },
+        {
+          "id": "palatum",
+          "label": "Palatum",
+          "sublokasi": [
+            {
+              "id": "palatum-durum",
+              "label": "Palatum Durum (Keras)"
+            },
+            {
+              "id": "palatum-lunak",
+              "label": "Palatum Molle (Lunak)"
+            }
+          ],
+          "keterangan": "Langit-langit mulut"
+        },
+        {
+          "id": "dasar-mulut",
+          "label": "Dasar Mulut",
+          "sublokasi": null,
+          "keterangan": "Area di bawah lidah"
+        }
+      ]
+    },
+
+    "warnaPrioritas": {
+      "description": "Urutan prioritas pemeriksaan berdasarkan warna untuk keamanan diagnosis",
+      "priorities": [
+        {
+          "rank": 1,
+          "warna": ["merah", "campuran-merah-putih"],
+          "alasan": "Red flag untuk keganasan (eritroplakia, karsinoma)"
+        },
+        {
+          "rank": 2,
+          "warna": ["putih"],
+          "alasan": "Potensi prakanker (leukoplakia)"
+        },
+        {
+          "rank": 3,
+          "warna": ["coklat-hitam"],
+          "alasan": "DD melanoma (keganasan)"
+        }
+      ]
+    },
+    
+    "redFlags": {
+      "description": "Tanda bahaya yang memerlukan rujukan segera",
+      "flags": [
+        {
+          "sign": "Ulkus tidak sembuh > 2-3 minggu",
+          "action": "Biopsi wajib (r/o keganasan)"
+        },
+        {
+          "sign": "Indurasi pada tepi lesi",
+          "action": "Curiga karsinoma - rujuk segera"
+        },
+        {
+          "sign": "Fiksasi lesi ke jaringan bawah",
+          "action": "Curiga keganasan - rujuk segera"
+        },
+        {
+          "sign": "Limfadenopati servikal",
+          "action": "Evaluasi keganasan/infeksi sistemik"
+        },
+        {
+          "sign": "Lesi merah yang persisten (eritroplakia)",
+          "action": "Biopsi wajib - risiko tinggi keganasan"
+        },
+        {
+          "sign": "Pigmentasi hitam yang membesar",
+          "action": "DD melanoma - biopsi wajib"
+        }
+      ]
+    }
+  }
+}
