@@ -557,10 +557,29 @@
             
             const matches = [];
             const userData = appState.data;
-            
+                    
             diagnosisDatabase.diagnoses.forEach(diagnosis => {
                 let score = 0;
                 let maxScore = 0;
+
+                // CRITICAL: Special handling for Karsinoma Sel Skuamosa
+            if (diagnosis.id === 'karsinoma-sel-skuamosa') {
+                // Must meet ALL critical criteria
+                const criticalChecks = {
+                    ukuranBesar: userData.size === 'besar',
+                    durasiKronik: userData.duration === 'kronik',
+                    lokasiHighRisk: ['lidah-lateral', 'lidah-ventral', 'dasar-mulut', 'palatum-lunak']
+                        .includes(userData.subLocation || userData.location),
+                    morfologiSesuai: ['ulcer', 'nodul', 'tumor'].includes(userData.morphologyDetail),
+                    warnaSesuai: userData.color === 'campuran-merah-putih'
+                };
+                
+                // If ANY critical criteria is NOT met, skip this diagnosis entirely
+                const passedCritical = Object.values(criticalChecks).filter(v => v === true).length;
+                if (passedCritical < 4) { // Must pass at least 4 out of 5
+                    return; // Skip KSS from results
+                }
+            }
                 
                 // Match color (weight: 30)
                 maxScore += 30;
@@ -668,6 +687,22 @@
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-gray-800 mb-2">Diagnosis Utama</h3>
                             <div class="text-2xl font-bold text-green-700 mb-2">${diag.name}</div>
+                            ${diag.id === 'karsinoma-sel-skuamosa' ? `
+                            <div class="mt-3 p-4 bg-red-50 border-2 border-red-300 rounded-lg">
+                                <div class="flex items-start">
+                                    <span class="text-2xl mr-2">⚠️</span>
+                                    <div class="text-sm text-red-800">
+                                        <strong>CATATAN PENTING:</strong> Diagnosis KSS memerlukan konfirmasi dengan pemeriksaan klinis tambahan yang HANYA bisa dinilai saat pemeriksaan langsung:<br>
+                                        <ul class="list-disc list-inside mt-2 ml-2">
+                                            <li>Indurasi tepi lesi (+)</li>
+                                            <li>Tepi lesi bergulung (rolled border)</li>
+                                            <li>Fiksasi jaringan</li>
+                                        </ul>
+                                        <strong class="block mt-2">WAJIB BIOPSI untuk konfirmasi definitif.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            ` : ''}
                             <div class="text-sm text-gray-600 mb-1">
                                 <strong>Nama Awam:</strong> ${diag.commonName}
                             </div>
