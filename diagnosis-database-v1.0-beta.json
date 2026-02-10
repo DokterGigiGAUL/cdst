@@ -482,26 +482,15 @@
               "durasi-kronik",
               "lokasi-high-risk"
             ],
-          "catatan": "KEGANASAN! Diagnosis TIDAK boleh ditegakkan hanya dari warna dan morfologi. WAJIB ada: (1) Ukuran besar, (2) Tidak sembuh >2-3 minggu, (3) Lokasi high-risk, (4) Indurasi tepi (+), (5) Tepi bergulung, (6) Fiksasi. BIOPSI adalah gold standard."          }
+            "catatan": "KEGANASAN! Diagnosis TIDAK boleh ditegakkan hanya dari warna dan morfologi. WAJIB ada: (1) Ukuran besar, (2) Tidak sembuh >2-3 minggu, (3) Lokasi high-risk, (4) Indurasi tepi (+), (5) Tepi bergulung, (6) Fiksasi. BIOPSI adalah gold standard.",
             "karakteristik": {
-            "jumlah": "soliter",
-            "bentuk_tepi": "ireguler",
-            "tepi": "raised-rolled",
-            "indurasi": true,
-            "fiksasi": true
-          }  
-        },
-        "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
-        "ukuran": {
-          "kategori": ["sedang", "besar"],
-          "min": 1.0,
-          "progressive": true
-        },
-        "nyeri": "stadium-lanjut",
-        "durasi": {
-          "type": "kronik",
-          "tidak-sembuh": true
-        }
+              "jumlah": "soliter",
+              "bentuk_tepi": "ireguler",
+              "tepi": "raised-rolled",
+              "indurasi": true,
+              "fiksasi": true
+            }
+          }
       },
       "klinisInfo": {
          "tandaGejala": [
