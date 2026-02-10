@@ -595,7 +595,7 @@
     if (diagnosis.id === 'fibroma') {
         // Fibroma = nodul/papula with smooth surface, NOT ulcer
         if (userData.morphologyDetail === 'tumor') {
-            return; // Skip fibroma for ulcers
+            return; // Skip fibroma for tumor
         }
         
         // Fibroma jarang di lidah lateral posterior (high-risk zone)
@@ -604,7 +604,20 @@
             score = score * 0.3; // Heavy penalty
         }
     }
-                
+
+                 // EXCLUSIO hemangioma should NOT match nodul in high-risk zones
+    if (diagnosis.id === 'hemangioma') {
+        // Fibroma = nodul/papula with smooth surface, NOT ulcer
+        if (userData.morphologyDetail === 'nodul') {
+            return; // Skip fibroma for tumor
+        }
+        
+        // Fibroma jarang di lidah lateral posterior (high-risk zone)
+        if (['lidah-lateral', 'dasar-mulut'].includes(userData.subLocation || userData.location) 
+            && userData.size === 'besar') {
+            score = score * 0.3; // Heavy penalty
+        }
+    }            
                  // EXCLUSION: Traumatic ulcer should NOT match if chronic + large
     if (diagnosis.id === 'traumatic-ulcer') {
         // Traumatic ulcer biasa = akut, kecil-sedang
