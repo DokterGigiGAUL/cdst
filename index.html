@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiagnosaMulut - Beta v1.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .color-card:hover, .option-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .color-card, .option-card {
+            transition: all 0.3s ease;
+        }
+        .color-card.selected, .option-card.selected {
+            border-color: #3b82f6 !important;
+            background: #eff6ff !important;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .split-color {
+            background: linear-gradient(90deg, var(--color1) 0%, var(--color1) 50%, var(--color2) 50%, var(--color2) 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-bold text-blue-600">DiagnosaMulut</h1>
+                    <p class="text-sm text-gray-600">Panduan Diagnosis Lesi Oral - Beta v1.0</p>
+                </div>
+                <button id="resetBtn" class="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700" id="progressText">Langkah 1 dari 4</span>
+                <span class="text-sm text-gray-500" id="progressPercent">25%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div id="progressBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 25%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        
+        <!-- Step 1: Warna Lesi -->
+        <div id="step1" class="fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">1</div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Pilih Warna Dominan Lesi</h2>
+                        <p class="text-sm text-gray-600">Tentukan warna yang paling terlihat pada lesi</p>
+                    </div>
+                </div>
+                <div id="colorOptions" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Morfologi -->
+        <div id="step2" class="hidden fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">2</div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Bentuk/Morfologi Lesi</h2>
+                        <p class="text-sm text-gray-600">Pilih kategori dasar morfologi</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <button onclick="selectMorphology('elevated')" class="option-card border-2 border-gray-200 rounded-lg p-6 text-center hover:border-blue-400">
+                        <div class="text-4xl mb-3">⬆️</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Elevated</h3>
+                        <p class="text-xs text-gray-500">Di atas bidang normal mukosa</p>
+                    </button>
+                    <button onclick="selectMorphology('depressed')" class="option-card border-2 border-gray-200 rounded-lg p-6 text-center hover:border-blue-400">
+                        <div class="text-4xl mb-3">⬇️</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Depressed</h3>
+                        <p class="text-xs text-gray-500">Di bawah bidang normal mukosa</p>
+                    </button>
+                    <button onclick="selectMorphology('flat')" class="option-card border-2 border-gray-200 rounded-lg p-6 text-center hover:border-blue-400">
+                        <div class="text-4xl mb-3">➡️</div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Flat</h3>
+                        <p class="text-xs text-gray-500">Sejajar dengan bidang normal mukosa</p>
+                    </button>
+                </div>
+                <div id="morphologyDetail" class="hidden border-t pt-6">
+                    <h3 class="font-semibold text-gray-700 mb-4">Detail Morfologi:</h3>
+                    <div id="morphologyOptions" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Lokasi -->
+        <div id="step3" class="hidden fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">3</div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Lokasi Lesi</h2>
+                        <p class="text-sm text-gray-600">Pilih lokasi anatomi lesi</p>
+                    </div>
+                </div>
+                <div class="mb-6 p-6 bg-gray-50 rounded-lg">
+                    <p class="text-center text-sm text-gray-500 mb-4">📍 Klik area untuk memilih lokasi</p>
+                    <div id="locationOptions" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                </div>
+                <div id="subLocationArea" class="hidden border-t pt-6">
+                    <h3 class="font-semibold text-gray-700 mb-4">Pilih area spesifik:</h3>
+                    <div id="subLocationOptions" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button onclick="goBack(2)" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">← Kembali</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Karakteristik Tambahan -->
+        <div id="step4" class="hidden fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mr-3">4</div>
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Informasi Tambahan</h2>
+                        <p class="text-sm text-gray-600">Data pendukung untuk diagnosis</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Ukuran Lesi (estimasi)</label>
+                        <div class="grid grid-cols-3 gap-3" id="sizeOptions"></div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Keluhan Nyeri</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="selectPain(true)" class="option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400">Ya, ada nyeri</button>
+                            <button onclick="selectPain(false)" class="option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400">Tidak nyeri</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Durasi Lesi</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button onclick="selectDuration('akut')" class="option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-center">< 2 minggu</button>
+                            <button onclick="selectDuration('subakut')" class="option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-center">2-6 minggu</button>
+                            <button onclick="selectDuration('kronik')" class="option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-center">> 6 minggu</button>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t">
+                        <button onclick="showResults()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            Lihat Hasil Diagnosis →
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-6">
+                    <button onclick="goBack(3)" class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">← Kembali</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div id="results" class="hidden fade-in">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Hasil Diagnosis</h2>
+                    <p class="text-sm text-gray-600">Berdasarkan data yang Anda masukkan</p>
+                </div>
+
+                <!-- Summary Card -->
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 mb-6">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div><div class="text-gray-600 mb-1">Warna</div><div id="summaryColor" class="font-semibold text-gray-800">-</div></div>
+                        <div><div class="text-gray-600 mb-1">Morfologi</div><div id="summaryMorph" class="font-semibold text-gray-800">-</div></div>
+                        <div><div class="text-gray-600 mb-1">Lokasi</div><div id="summaryLoc" class="font-semibold text-gray-800">-</div></div>
+                        <div><div class="text-gray-600 mb-1">Ukuran</div><div id="summarySize" class="font-semibold text-gray-800">-</div></div>
+                    </div>
+                </div>
+
+                <!-- Main Diagnosis -->
+                <div id="mainDiagnosisCard" class="border-l-4 border-green-500 bg-green-50 p-6 rounded-r-lg mb-6">
+                    <!-- Will be populated by JS -->
+                </div>
+
+                <!-- Differential Diagnosis -->
+                <div id="differentialArea" class="mb-6">
+                    <h3 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="text-xl mr-2">⚠️</span>
+                        Diagnosis Banding
+                    </h3>
+                    <div id="differentialList" class="space-y-3">
+                        <!-- Will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- No Match Message -->
+                <div id="noMatchMessage" class="hidden border-l-4 border-yellow-500 bg-yellow-50 p-6 rounded-r-lg mb-6">
+                    <div class="flex items-start">
+                        <div class="text-3xl mr-4">⚠️</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Tidak Ditemukan Diagnosis yang Sesuai</h3>
+                            <p class="text-sm text-gray-700 mb-3">
+                                Kombinasi karakteristik yang Anda masukkan tidak cocok dengan diagnosis dalam database kami.
+                            </p>
+                            <p class="text-sm text-gray-700">
+                                Kemungkinan: (1) Kondisi langka yang belum ada di database beta, 
+                                (2) Kombinasi karakteristik yang tidak biasa, atau 
+                                (3) Input yang perlu diperbaiki.
+                            </p>
+                            <div class="mt-4 p-3 bg-white rounded border border-yellow-300">
+                                <p class="text-sm font-semibold text-gray-800 mb-2">Saran:</p>
+                                <ul class="text-sm text-gray-700 list-disc list-inside space-y-1">
+                                    <li>Periksa kembali karakteristik lesi</li>
+                                    <li>Konsultasi dengan SpPM untuk kasus kompleks</li>
+                                    <li>Lakukan pemeriksaan penunjang (biopsi, dll)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row gap-3">
+                    <button onclick="exportPDF()" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                        📄 Export PDF
+                    </button>
+                    <button onclick="startOver()" class="flex-1 bg-gray-600 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+                        🔄 Diagnosis Baru
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-gray-600">
+            <p>DiagnosaMulut v1.0-beta • Berdasarkan <strong>Panduan Diagnosa Lesi Oral</strong></p>
+            <p class="mt-2 text-xs">Drg. Agam Ferry Erwana, Sp.PM • Untuk Dokter Gigi Profesional</p>
+        </div>
+    </footer>
+
+    <script>
+        // Embedded Database (simplified for prototype - in production, load from external JSON)
+        const DATABASE_URL = 'diagnosis-database-v1.0-beta.json';
+        let diagnosisDatabase = null;
+
+        // App State
+        const appState = {
+            currentStep: 1,
+            data: {
+                color: null,
+                morphology: null,
+                morphologyDetail: null,
+                location: null,
+                subLocation: null,
+                size: null,
+                pain: null,
+                duration: null
+            },
+            matches: []
+        };
+
+        // Color configurations with proper split display
+        const colorConfig = {
+            'putih': { 
+                label: 'Putih', 
+                bg: 'bg-white border-2 border-gray-300',
+                prevalence: '50% lesi oral'
+            },
+            'merah': { 
+                label: 'Merah', 
+                bg: 'bg-red-500',
+                prevalence: '80% lesi oral'
+            },
+            'campuran-merah-putih': { 
+                label: 'Merah | Putih', 
+                split: true,
+                color1: '#ef4444',
+                color2: '#ffffff',
+                prevalence: '34% lesi oral'
+            },
+            'merah-muda': { 
+                label: 'Merah Muda', 
+                bg: 'bg-pink-300',
+                prevalence: 'Sewarna jaringan'
+            },
+            'coklat-hitam': { 
+                label: 'Coklat | Hitam', 
+                split: true,
+                color1: '#92400e',
+                color2: '#000000',
+                prevalence: 'Lesi pigmentasi'
+            },
+            'biru-ungu': { 
+                label: 'Biru | Ungu', 
+                split: true,
+                color1: '#2563eb',
+                color2: '#9333ea',
+                prevalence: 'Vaskular/kistik'
+            },
+            'kuning': { 
+                label: 'Kuning', 
+                bg: 'bg-yellow-300',
+                prevalence: '7% lesi oral'
+            }
+        };
+
+        // Morphology options
+        const morphologyOptions = {
+            elevated: [
+                { id: 'vesikel', label: 'Vesikel', desc: '≤ 0.5 cm' },
+                { id: 'bula', label: 'Bulla', desc: '> 0.5 cm' },
+                { id: 'pustula', label: 'Pustula', desc: 'Berisi pus' },
+                { id: 'papula', label: 'Papula', desc: '≤ 0.5 cm' },
+                { id: 'nodul', label: 'Nodul', desc: '0.5-2 cm' },
+                { id: 'tumor', label: 'Tumor', desc: '> 2 cm' },
+                { id: 'plak', label: 'Plak', desc: 'Datar luas' }
+            ],
+            depressed: [
+                { id: 'ulcer', label: 'Ulser', desc: 'Luka terbuka' },
+                { id: 'atrofi', label: 'Atrofi', desc: 'Penipisan' },
+                { id: 'pit', label: 'Pit/Fossa', desc: 'Cekungan kecil' }
+            ],
+            flat: [
+                { id: 'makula', label: 'Makula', desc: '≤ 1 cm' },
+                { id: 'patch', label: 'Patch', desc: '> 1 cm' }
+            ]
+        };
+
+        // Initialize app
+        async function initApp() {
+            try {
+                // Load database
+                const response = await fetch(DATABASE_URL);
+                diagnosisDatabase = await response.json();
+                
+                console.log('Database loaded:', diagnosisDatabase.meta);
+                
+                // Render initial UI
+                renderColorOptions();
+                renderSizeOptions();
+                renderLocationOptions();
+            } catch (error) {
+                console.error('Failed to load database:', error);
+                alert('Gagal memuat database. Pastikan file diagnosis-database-v1.0-beta.json ada di folder yang sama.');
+            }
+        }
+
+        // Render color options
+        function renderColorOptions() {
+            const container = document.getElementById('colorOptions');
+            container.innerHTML = '';
+            
+            Object.entries(colorConfig).forEach(([key, config]) => {
+                const btn = document.createElement('button');
+                btn.className = 'color-card border-2 border-gray-200 rounded-lg p-4 text-left hover:border-blue-400';
+                btn.onclick = () => selectColor(key);
+                
+                let colorBox;
+                if (config.split) {
+                    colorBox = `<div class="w-full h-20 rounded mb-3 split-color" style="--color1: ${config.color1}; --color2: ${config.color2};"></div>`;
+                } else {
+                    colorBox = `<div class="w-full h-20 ${config.bg} rounded mb-3"></div>`;
+                }
+                
+                btn.innerHTML = `
+                    ${colorBox}
+                    <h3 class="font-semibold text-gray-800">${config.label}</h3>
+                    <p class="text-xs text-gray-500 mt-1">${config.prevalence}</p>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Render size options from database
+        function renderSizeOptions() {
+            if (!diagnosisDatabase) return;
+            
+            const container = document.getElementById('sizeOptions');
+            const categories = diagnosisDatabase.lookupTables.ukuranKategori.categories;
+            
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.onclick = () => selectSize(cat.id);
+                btn.className = 'option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-center';
+                btn.innerHTML = `
+                    <div class="font-medium">${cat.label}</div>
+                    <div class="text-xs text-gray-500">${cat.range}</div>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Render location options from database
+        function renderLocationOptions() {
+            if (!diagnosisDatabase) return;
+            
+            const container = document.getElementById('locationOptions');
+            const locations = diagnosisDatabase.lookupTables.lokasiHierarki.locations;
+            
+            locations.forEach(loc => {
+                const btn = document.createElement('button');
+                btn.onclick = () => selectLocation(loc.id, loc.sublokasi);
+                btn.className = 'option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-left';
+                btn.innerHTML = `
+                    <div class="font-semibold text-gray-800">${loc.label}</div>
+                    <div class="text-xs text-gray-500">${loc.keterangan}</div>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Navigation
+        function goToStep(step) {
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step${i}`).classList.add('hidden');
+            }
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            appState.currentStep = step;
+            updateProgress(step);
+        }
+
+        function goBack(step) {
+            goToStep(step);
+        }
+
+        function updateProgress(step) {
+            const percentage = (step / 4) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = `Langkah ${step} dari 4`;
+            document.getElementById('progressPercent').textContent = Math.round(percentage) + '%';
+        }
+
+        // Selection functions
+        function selectColor(color) {
+            appState.data.color = color;
+            // Visual feedback
+            document.querySelectorAll('#colorOptions .color-card').forEach(el => el.classList.remove('selected'));
+            event.target.closest('.color-card').classList.add('selected');
+            setTimeout(() => goToStep(2), 300);
+        }
+
+        function selectMorphology(category) {
+            appState.data.morphology = category;
+            
+            // Show detail options
+            const detailDiv = document.getElementById('morphologyDetail');
+            const optionsDiv = document.getElementById('morphologyOptions');
+            
+            detailDiv.classList.remove('hidden');
+            optionsDiv.innerHTML = '';
+            
+            // Visual feedback
+            document.querySelectorAll('#step2 .option-card').forEach(el => el.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            morphologyOptions[category].forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-left';
+                btn.innerHTML = `
+                    <div class="font-medium text-sm">${option.label}</div>
+                    <div class="text-xs text-gray-500">${option.desc}</div>
+                `;
+                btn.onclick = () => selectMorphologyDetail(option.id);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function selectMorphologyDetail(detail) {
+            appState.data.morphologyDetail = detail;
+            event.target.classList.add('selected');
+            setTimeout(() => goToStep(3), 300);
+        }
+
+        function selectLocation(locationId, sublocations) {
+            if (sublocations && sublocations.length > 0) {
+                // Show sublocation options
+                appState.data.location = locationId;
+                const subArea = document.getElementById('subLocationArea');
+                const subOptions = document.getElementById('subLocationOptions');
+                
+                subArea.classList.remove('hidden');
+                subOptions.innerHTML = '';
+                
+                sublocations.forEach(sub => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-card border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 text-left';
+                    btn.innerHTML = `<div class="font-medium text-sm">${sub.label}</div>`;
+                    btn.onclick = () => selectSubLocation(sub.id);
+                    subOptions.appendChild(btn);
+                });
+            } else {
+                // No sublocation, proceed directly
+                appState.data.location = locationId;
+                appState.data.subLocation = null;
+                setTimeout(() => goToStep(4), 300);
+            }
+        }
+
+        function selectSubLocation(subLocationId) {
+            appState.data.subLocation = subLocationId;
+            event.target.classList.add('selected');
+            setTimeout(() => goToStep(4), 300);
+        }
+
+        function selectSize(size) {
+            appState.data.size = size;
+            document.querySelectorAll('#sizeOptions .option-card').forEach(el => el.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        function selectPain(hasPain) {
+            appState.data.pain = hasPain;
+            document.querySelectorAll('#step4 .option-card').forEach(el => {
+                if (el.onclick.toString().includes('selectPain')) {
+                    el.classList.remove('selected');
+                }
+            });
+            event.target.classList.add('selected');
+        }
+
+        function selectDuration(duration) {
+            appState.data.duration = duration;
+            document.querySelectorAll('#step4 .option-card').forEach(el => {
+                if (el.onclick.toString().includes('selectDuration')) {
+                    el.classList.remove('selected');
+                }
+            });
+            event.target.classList.add('selected');
+        }
+
+        // Diagnosis matching algorithm
+        function findMatches() {
+            if (!diagnosisDatabase) return [];
+            
+            const matches = [];
+            const userData = appState.data;
+            
+            diagnosisDatabase.diagnoses.forEach(diagnosis => {
+                let score = 0;
+                let maxScore = 0;
+                
+                // Match color (weight: 30)
+                maxScore += 30;
+                if (diagnosis.criteria.warna.includes(userData.color)) {
+                    score += 30;
+                }
+                
+                // Match morphology category (weight: 25)
+                maxScore += 25;
+                if (diagnosis.criteria.morfologi.kategori === userData.morphology) {
+                    score += 25;
+                    
+                    // Match morphology detail (weight: 20)
+                    maxScore += 20;
+                    if (diagnosis.criteria.morfologi.detail === userData.morphologyDetail || 
+                        (Array.isArray(diagnosis.criteria.morfologi.detail) && 
+                         diagnosis.criteria.morfologi.detail.includes(userData.morphologyDetail))) {
+                        score += 20;
+                    }
+                }
+                
+                // Match location (weight: 15)
+                maxScore += 15;
+                const finalLocation = userData.subLocation || userData.location;
+                if (diagnosis.criteria.lokasi.includes(finalLocation)) {
+                    score += 15;
+                }
+                
+                // Match size (weight: 5)
+                maxScore += 5;
+                if (diagnosis.criteria.ukuran.kategori) {
+                    if (Array.isArray(diagnosis.criteria.ukuran.kategori)) {
+                        if (diagnosis.criteria.ukuran.kategori.includes(userData.size)) {
+                            score += 5;
+                        }
+                    } else if (diagnosis.criteria.ukuran.kategori === userData.size) {
+                        score += 5;
+                    }
+                }
+                
+                // Match pain (weight: 3)
+                maxScore += 3;
+                if (diagnosis.criteria.nyeri === userData.pain || 
+                    diagnosis.criteria.nyeri === 'ringan-sedang' || 
+                    diagnosis.criteria.nyeri === 'stadium-lanjut') {
+                    score += 3;
+                }
+                
+                // Match duration (weight: 2)
+                maxScore += 2;
+                if (diagnosis.criteria.durasi && diagnosis.criteria.durasi.type) {
+                    const durasiType = diagnosis.criteria.durasi.type;
+                    if (durasiType.includes(userData.duration) || 
+                        durasiType.includes('akut-kronik') ||
+                        userData.duration === 'subakut') {
+                        score += 2;
+                    }
+                }
+                
+                const percentage = (score / maxScore) * 100;
+                
+                // Only include matches with >40% confidence
+                if (percentage >= 40) {
+                    matches.push({
+                        diagnosis: diagnosis,
+                        score: score,
+                        percentage: percentage
+                    });
+                }
+            });
+            
+            // Sort by score descending
+            matches.sort((a, b) => b.score - a.score);
+            
+            return matches;
+        }
+
+        // Show results
+        function showResults() {
+            appState.matches = findMatches();
+            
+            // Populate summary
+            document.getElementById('summaryColor').textContent = colorConfig[appState.data.color]?.label || '-';
+            document.getElementById('summaryMorph').textContent = 
+                `${appState.data.morphology} / ${appState.data.morphologyDetail}`;
+            document.getElementById('summaryLoc').textContent = appState.data.subLocation || appState.data.location || '-';
+            document.getElementById('summarySize').textContent = appState.data.size || '-';
+            
+            const mainCard = document.getElementById('mainDiagnosisCard');
+            const diffArea = document.getElementById('differentialArea');
+            const noMatch = document.getElementById('noMatchMessage');
+            
+            if (appState.matches.length > 0) {
+                // Show main diagnosis
+                const topMatch = appState.matches[0];
+                const diag = topMatch.diagnosis;
+                
+                mainCard.classList.remove('hidden');
+                diffArea.classList.remove('hidden');
+                noMatch.classList.add('hidden');
+                
+                mainCard.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="text-3xl mr-4">✓</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Diagnosis Utama</h3>
+                            <div class="text-2xl font-bold text-green-700 mb-2">${diag.name}</div>
+                            <div class="text-sm text-gray-600 mb-1">
+                                <strong>Nama Awam:</strong> ${diag.commonName}
+                            </div>
+                            <div class="text-sm text-gray-600 mb-3">
+                                <strong>ICD-10:</strong> <span class="font-mono bg-white px-2 py-1 rounded">${diag.icd10}</span>
+                                <span class="ml-3 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                    ${Math.round(topMatch.percentage)}% match
+                                </span>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 mb-3">
+                                <h4 class="font-semibold text-gray-800 mb-2">Tanda & Gejala Klinis:</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    ${diag.klinisInfo.tandaGejala.slice(0, 5).map(sign => `<li>${sign}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Tatalaksana:</h4>
+                                <p class="text-sm text-gray-700">${diag.tatalaksana.ringkas}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Show differential diagnoses
+                const diffList = document.getElementById('differentialList');
+                diffList.innerHTML = '';
+                
+                // Show top 2-3 differential diagnoses from database
+                if (diag.diagnosisBanding && diag.diagnosisBanding.length > 0) {
+                    diag.diagnosisBanding.forEach(dd => {
+                        const ddDiag = diagnosisDatabase.diagnoses.find(d => d.id === dd.id);
+                        if (ddDiag) {
+                            const ddCard = document.createElement('div');
+                            ddCard.className = 'border border-yellow-300 bg-yellow-50 rounded-lg p-4';
+                            ddCard.innerHTML = `
+                                <div class="font-semibold text-gray-800">${ddDiag.name}</div>
+                                <p class="text-sm text-gray-600 mt-1"><strong>Alasan DD:</strong> ${dd.alasan}</p>
+                                <p class="text-sm text-gray-700 mt-1"><strong>Pembeda:</strong> ${dd.pembeda}</p>
+                            `;
+                            diffList.appendChild(ddCard);
+                        }
+                    });
+                }
+                
+                // Also show other high-scoring matches as DD
+                if (appState.matches.length > 1) {
+                    appState.matches.slice(1, 3).forEach(match => {
+                        const ddCard = document.createElement('div');
+                        ddCard.className = 'border border-yellow-300 bg-yellow-50 rounded-lg p-4';
+                        ddCard.innerHTML = `
+                            <div class="font-semibold text-gray-800">${match.diagnosis.name}</div>
+                            <p class="text-sm text-gray-600 mt-1">
+                                Match: ${Math.round(match.percentage)}% - ${match.diagnosis.commonName}
+                            </p>
+                        `;
+                        diffList.appendChild(ddCard);
+                    });
+                }
+                
+            } else {
+                // No matches found
+                mainCard.classList.add('hidden');
+                diffArea.classList.add('hidden');
+                noMatch.classList.remove('hidden');
+            }
+            
+            // Show results page
+            document.getElementById('step4').classList.add('hidden');
+            document.getElementById('results').classList.remove('hidden');
+            
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressText').textContent = 'Diagnosis Selesai';
+            document.getElementById('progressPercent').textContent = '100%';
+        }
+
+        // Export & Reset
+        function exportPDF() {
+            alert('🚧 Fitur Export PDF akan segera hadir di versi selanjutnya!');
+        }
+
+        function startOver() {
+            if (confirm('Apakah Anda yakin ingin memulai diagnosis baru?')) {
+                location.reload();
+            }
+        }
+
+        // Event listeners
+        document.getElementById('resetBtn').addEventListener('click', startOver);
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
