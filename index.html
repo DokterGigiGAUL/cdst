@@ -562,24 +562,49 @@
                 let score = 0;
                 let maxScore = 0;
 
-                // CRITICAL: Special handling for Karsinoma Sel Skuamosa
+                    // CRITICAL: Special handling for Karsinoma Sel Skuamosa
             if (diagnosis.id === 'karsinoma-sel-skuamosa') {
-                // Must meet ALL critical criteria
-                const criticalChecks = {
-                    ukuranBesar: userData.size === 'besar',
-                    durasiKronik: userData.duration === 'kronik',
-                    lokasiHighRisk: ['lidah-lateral', 'lidah-ventral', 'dasar-mulut', 'palatum-lunak']
-                        .includes(userData.subLocation || userData.location),
-                    morfologiSesuai: ['ulcer', 'nodul', 'tumor'].includes(userData.morphologyDetail),
-                    warnaSesuai: userData.color === 'campuran-merah-putih'
-                };
-                
-                // If ANY critical criteria is NOT met, skip this diagnosis entirely
-                const passedCritical = Object.values(criticalChecks).filter(v => v === true).length;
-                if (passedCritical < 4) { // Must pass at least 4 out of 5
-                    return; // Skip KSS from results
-                }
+            // Minimum 3 critical criteria must be met:
+            // 1. Warna merah-putih
+            // 2. Morfologi: tumor/nodul/ulcer
+            // 3. Ukuran besar
+            // 4. High-risk location: lidah lateral/ventral atau dasar mulut
+            
+            const criticalChecks = {
+                warnaSesuai: userData.color === 'campuran-merah-putih',
+                morfologiSesuai: ['ulcer', 'nodul', 'tumor'].includes(userData.morphologyDetail),
+                ukuranBesar: userData.size === 'besar',
+                lokasiHighRisk: ['lidah-lateral', 'lidah-ventral', 'dasar-mulut']
+                    .includes(userData.subLocation || userData.location)
+            };
+            
+            const passedCount = Object.values(criticalChecks).filter(v => v === true).length;
+            
+            // Must pass at least 3 out of 4 critical criteria
+            if (passedCount < 3) {
+                return; // Skip KSS entirely
             }
+            
+            // BOOST: If 3+ criteria met, prioritize KSS heavily
+            if (passedCount >= 3) {
+                maxScore += 40;
+                score += 40; // Strong boost to top
+            }
+        }
+                // EXCLUSION: Fibroma should NOT match large ulcers in high-risk zones
+    if (diagnosis.id === 'fibroma') {
+        // Fibroma = nodul/papula with smooth surface, NOT ulcer
+        if (userData.morphologyDetail === 'tumor') {
+            return; // Skip fibroma for ulcers
+        }
+        
+        // Fibroma jarang di lidah lateral posterior (high-risk zone)
+        if (['lidah-lateral', 'dasar-mulut'].includes(userData.subLocation || userData.location) 
+            && userData.size === 'besar') {
+            score = score * 0.3; // Heavy penalty
+        }
+    }
+                
                  // EXCLUSION: Traumatic ulcer should NOT match if chronic + large
     if (diagnosis.id === 'traumatic-ulcer') {
         // Traumatic ulcer biasa = akut, kecil-sedang
