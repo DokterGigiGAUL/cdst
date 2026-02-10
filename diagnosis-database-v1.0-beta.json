@@ -832,18 +832,18 @@
       "icd10": "D18.0",
       "prevalence": "moderate",
       "criteria": {
-        "warna": ["merah", "biru", "ungu"],
+        "warna": ["biru", "ungu"],
         "morfologi": {
           "kategori": "elevated",
-          "detail": ["papula", "nodul"],
+          "detail": ["tumor", "nodul"],
           "karakteristik": {
             "kompresibel": true,
             "blanching": true
           }
         },
-        "lokasi": ["lidah-dorsal", "lidah-lateral", "mukosa-bukal", "mukosa-labial"],
+        "lokasi": ["lidah-dorsal", "lidah-ventral", "mukosa-bukal", "mukosa-labial"],
         "ukuran": {
-          "kategori": ["kecil", "sedang", "besar"],
+          "kategori": ["kecil", "sedang"],
           "variabel": true,
           "congenital": "dapat besar"
         },
