@@ -463,13 +463,13 @@
             "kategori": ["depressed", "elevated"],
             "detail": ["ulcer", "nodul", "tumor"]
             },
-          "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
+          "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-durum"],
           "ukuran": {
             "kategori": ["besar"],
             "min": 1.0,
             "progressive": true
           },
-          "nyeri": "stadium-lanjut",
+          "nyeri": ["true", "false", "stadium-lanjut"],
           "durasi": {
             "type": "kronik",
             "healing": "> 2-3 minggu",
@@ -1049,12 +1049,12 @@
       "name": "Nicotine Stomatitis",
       "commonName": "Smoker's Palate",
       "icd10": "K13.24",
-      "prevalence": "moderate",
+      "prevalence": "rare",
       "criteria": {
-        "warna": ["campuran-merah-putih"],
+        "warna": ["merah", "campuran-merah-putih"],
         "morfologi": {
-          "kategori": "elevated",
-          "detail": "plak",
+          "kategori": "flat",
+          "detail": "papula",
           "karakteristik": {
             "pola": "papula multipel dengan red dots",
             "tekstur": "kerikil/cobblestone",
@@ -1074,10 +1074,10 @@
       "klinisInfo": {
         "tandaGejala": [
           "Palatum berwarna abu-abu hingga putih difus",
-          "Papula multipel seperti kerikil (cobblestone)",
           "Titik merah di tengah papula (muara duktus kelenjar minor yang inflamed)",
+          "Papula multipel seperti kerikil (cobblestone)",
           "Distribusi bilateral dan simetris",
-          "Tanpa gejala",
+          "Tanpa gejala/ nyeri",
           "Hanya pada perokok (terutama pipa)"
         ],
         "faktorPemicu": [
@@ -1102,15 +1102,10 @@
           "id": "kandidiasis",
           "alasan": "Lesi putih difus di palatum",
           "pembeda": "Kandidiasis: dapat dikerok. Nicotine stomatitis: tidak dapat dikerok, ada red dots"
-        },
-        {
-          "id": "papillomatosis",
-          "alasan": "Papula multipel",
-          "pembeda": "Nicotine stomatitis: reversibel dengan stop rokok, bilateral. Papillomatosis: tidak"
         }
       ],
       "images": [],
-      "references": ["Panduan Diagnosa Lesi Oral, hal. 64"]
+      "references": ["Panduan Diagnosa Lesi Oral"]
     }
   ],
 
