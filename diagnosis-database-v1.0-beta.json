@@ -482,8 +482,8 @@
               "durasi-kronik",
               "lokasi-high-risk"
             ],
-"catatan": "KEGANASAN! Diagnosis TIDAK boleh ditegakkan hanya dari warna dan morfologi. WAJIB ada: (1) Ukuran besar, (2) Tidak sembuh >2-3 minggu, (3) Lokasi high-risk, (4) Indurasi tepi (+), (5) Tepi bergulung, (6) Fiksasi. BIOPSI adalah gold standard."          }
-          "karakteristik": {
+
+            "karakteristik": {
             "jumlah": "soliter",
             "bentuk_tepi": "ireguler",
             "tepi": "raised-rolled",
