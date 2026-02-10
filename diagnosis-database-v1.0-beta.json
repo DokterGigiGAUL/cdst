@@ -461,7 +461,7 @@
           "warna": ["campuran-merah-putih"],
           "morfologi": {
             "kategori": ["depressed", "elevated"],
-            "detail": ["ulcer", "nodul", "tumor"],
+            "detail": ["ulcer", "nodul", "tumor"]
             },
           "lokasi": ["lidah-lateral", "lidah-ventral", "dasar-mulut", "palatum-lunak"],
           "ukuran": {
