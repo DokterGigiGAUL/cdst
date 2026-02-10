@@ -580,7 +580,20 @@
                     return; // Skip KSS from results
                 }
             }
-                
+                 // EXCLUSION: Traumatic ulcer should NOT match if chronic + large
+    if (diagnosis.id === 'traumatic-ulcer') {
+        // Traumatic ulcer biasa = akut, kecil-sedang
+        if (userData.duration === 'kronik' || userData.size === 'besar') {
+            // Reduce score dramatically or skip
+            score = score * 0.3; // Penalty 70%
+        }
+        
+        // Traumatic ulcer jarang di high-risk zone
+        const highRiskZones = ['lidah-ventral', 'dasar-mulut'];
+        if (highRiskZones.includes(userData.subLocation || userData.location)) {
+            score = score * 0.5; // Penalty 50%
+        }
+    }
                 // Match color (weight: 30)
                 maxScore += 30;
                 if (diagnosis.criteria.warna.includes(userData.color)) {
